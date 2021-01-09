@@ -22,7 +22,7 @@ public:
         if(img != nullptr)
             XDestroyImage(img);
         img = XGetImage(display, root, x, y, width, height, AllPlanes, ZPixmap);
-        cvImg = cv::Mat(height, width, CV_8UC4, img->data);
+        cvImg = cv::Mat(height, width, CV_8UC3, img->data);
     }
 
     virtual ~ScreenShot()
@@ -30,6 +30,13 @@ public:
         if(img != nullptr)
             XDestroyImage(img);
         XCloseDisplay(display);
+    }
+
+    void SetDisplay(int _x, int _y, int _width, int _height) {
+    	x = _x;
+    	y = _y;
+    	width = _width;
+    	height = _height;
     }
 
 private:
