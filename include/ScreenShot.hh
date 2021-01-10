@@ -22,7 +22,9 @@ public:
         if(img != nullptr)
             XDestroyImage(img);
         img = XGetImage(display, root, x, y, width, height, AllPlanes, ZPixmap);
-        cvImg = cv::Mat(height, width, CV_8UC3, img->data);
+        cv::Mat rgbaImg = cv::Mat(height, width, CV_8UC4, img->data);
+//        cvImg = cv::Mat(height, width, CV_8UC4, img->data);
+        cv::cvtColor(rgbaImg, cvImg, cv::COLOR_BGRA2BGR);
     }
 
     virtual ~ScreenShot()
